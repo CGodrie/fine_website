@@ -21,28 +21,36 @@
                 <img src="{% static 'logo_rond.png' %}" alt="Logo FINE">
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" href="/">Accueil</a>
-                    <a class="nav-item nav-link {% if request.path == '/login/' %}active{% endif %}" href="/login">Notre histoire</a>
-                    <a class="nav-item nav-link {% if request.path == '/nos-objectifs/' %}active{% endif %}" href="#">Nos objectifs</a>
-                    <a class="nav-item nav-link {% if request.path == '/ag-ca/' %}active{% endif %}" href="#">AG & CA</a>
-                    <a class="nav-item nav-link {% if request.path == '/contact/' %}active{% endif %}" href="#">Contact</a>
-                    <a class="nav-item nav-link {% if request.path == '/evenements/' %}active{% endif %}" href="#">Événements</a>
+                    <a class="nav-item nav-link {% if request.path == '/histoire' %}active{% endif %}"
+                        href="{% url 'history' %}">Notre histoire</a>
+                    <a class="nav-item nav-link {% if request.path == '/objectifs' %}active{% endif %}"
+                        href="{% url 'objectives' %}">Nos objectifs</a>
+                    <a class="nav-item nav-link {% if request.path == '/ag-ca' %}active{% endif %}"
+                        href="{% url 'ag-ca' %}">AG &
+                        CA</a>
+                    <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}"
+                        href="{% url 'contact' %}">Contact</a>
+                    <a class="nav-item nav-link {% if request.path == '/evenements' %}active{% endif %}"
+                        href="{% url 'events' %}">Événements</a>
                 </div>
                 <div class="navbar-nav ml-auto d-flex align-items-center">
                     {% if user.is_authenticated %}
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="profile-image" src="{% static 'default_profile.png' %}" alt="Profile Image" style="height: 30px; width: 30px;">
+                            <img class="profile-image" src="{% static 'default_profile.png' %}" alt="Profile Image"
+                                style="height: 30px; width: 30px;">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Zone CA</a>
+                            <a class="dropdown-item" href="{% url 'ca-private-zone' %}">Zone CA</a>
                             {% if user.is_superuser %}
                             <a class="dropdown-item" href="/admin">Admin</a>
                             {% endif %}
@@ -67,7 +75,7 @@
         {% endif %}
         {% block content %}{% endblock %}
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

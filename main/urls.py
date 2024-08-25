@@ -9,5 +9,6 @@ urlpatterns = [
     path('contact', views.contact, name="contact"),
     path('evenements', views.events, name="events"),
     path('ca-zone-privée', views.caprivatezone, name="ca-private-zone"),
-
+    path('contact', views.contact, name="contact"),
+    path('contact/success/', views.contact_success, name='contact_success'),
 ]

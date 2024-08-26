@@ -7,7 +7,7 @@
   margin-right: 15px;
 }
 
- .nav-link.active {
+.nav-link.active {
   color: #0056b3 !important;
   font-weight: bold;
 }
@@ -24,20 +24,67 @@
 }
 
 /* Styles personnalisés pour les cartes */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .custom-card {
+  width: 100%;
+  /* Pour s'assurer que les cartes prennent toute la largeur du conteneur */
+  height: 250px;
+  /* Hauteur fixe pour chaque carte */
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .custom-card .card-img-top {
-  max-height: 200px;
-  object-fit: contain
+  max-height: 150px;
+  /* Hauteur maximale pour l'image */
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
 .custom-card .card-text {
   font-weight: bold;
+  flex-grow: 1;
+  /* Permet à la description de prendre de l'espace disponible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.card-container a {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+}
+
+#pdf-viewer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+#pdf-frame {
+  width: 80%;
+  height: 90%;
+  margin: 5% auto;
+  display: block;
+  background: white;
 }
 
 /* Ajustement des indicateurs du carrousel */
@@ -54,25 +101,36 @@
 }
 
 .carousel-indicators .active {
-  background-color: white; 
-  border: 1px solid black; 
+  background-color: white;
+  border: 1px solid black;
 }
 
 /* Ajustement des contrôles du carrousel */
 .carousel-control-prev, .carousel-control-next {
-  width: 5%; 
+  width: 1.5%;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
   background-size: contain;
-  background-repeat: no-repeat; 
-  background-color: transparent; 
+  background-repeat: no-repeat;
+  background-color: transparent;
 }
 
 /* Ajustement des images du carrousel */
 .carousel-item img {
-  max-width: 100%;
-  max-height: 60vh;
+  max-width: 90%;
+  height: auto;
   object-fit: contain;
   margin: auto;
+}
+
+.carousel-item .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.carousel-item {
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 }

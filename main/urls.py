@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -7,8 +9,10 @@ urlpatterns = [
     path('objectifs', views.objectives, name="objectives"),
     path('ag-ca', views.agca, name="ag-ca"),
     path('contact', views.contact, name="contact"),
-    path('evenements', views.events, name="events"),
+    path('acte-des-journees', views.actcoftheday, name="act-of-the-days"),
     path('ca-zone-privée', views.caprivatezone, name="ca-private-zone"),
     path('contact', views.contact, name="contact"),
-    path('contact/success/', views.contact_success, name='contact_success'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

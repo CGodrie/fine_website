@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+import datetime
 
 class CarouselImage(models.Model):
     title = models.CharField(max_length=100, blank=True)
@@ -22,3 +24,17 @@ class NextConference(models.Model):
 
     def __str__(self):
         return self.title or f"Conference {self.id}"
+    
+class ActOfTheDays(models.Model):
+    title = models.CharField(max_length=100)
+    file = models.FileField(upload_to='acts/files/')
+    year = models.PositiveIntegerField(
+    validators=[
+        MinValueValidator(2011),
+        MaxValueValidator(datetime.datetime.now().year)
+    ],
+    default=datetime.datetime.now().year 
+    )
+
+
+

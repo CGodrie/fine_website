@@ -1,0 +1,38 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Liste des Actes {% if selected_year %} {{ selected_year }} {% endif %}</h1>
+    <!-- Formulaire pour filtrer les actes par année avec tri -->
+    <form method="GET" action="{% url 'act-of-the-days' %}" class="form-inline justify-content-center mb-4">
+        <div class="form-group mb-2">
+            {{ form.year.label_tag }}
+            {{ form.year }}
+        </div>
+        <button type="submit" class="btn btn-primary ml-2">Filtrer</button>
+        {% if selected_year is None %}
+        <a href="?sort=asc{% if form.year.value %}&year={{ form.year.value }}{% endif %}"
+            class="btn btn-outline-secondary ml-2">
+            <i class="bi bi-arrow-up"></i> Trier Croissant
+        </a>
+        <a href="?sort=desc{% if form.year.value %}&year={{ form.year.value }}{% endif %}"
+            class="btn btn-outline-secondary ml-2">
+            <i class="bi bi-arrow-down"></i> Trier Décroissant
+        </a>
+        {% endif %}
+    </form>
+
+    <!-- Liste des actes -->
+    <ul class="list-group">
+        {% for act in acts %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ act.file.url }}" target="_blank" class="text-decoration-none">
+                {{ act.year }} : {{ act.title }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

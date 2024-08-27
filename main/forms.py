@@ -1,4 +1,5 @@
 from django import forms
+from .models import ActOfTheDays
 
 class ContactForm(forms.Form):
     name = forms.CharField(
@@ -14,3 +15,17 @@ class ContactForm(forms.Form):
         label='Message',
         widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Tapez votre message', 'rows': 5})
     )
+
+class YearFilterForm(forms.Form):
+    year = forms.ChoiceField(
+        choices=[],
+        required=False,
+        label="Sélectionnez une année"
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(YearFilterForm, self).__init__(*args, **kwargs)
+        years = ActOfTheDays.objects.values_list('year', flat=True).distinct().order_by('year')
+        year_choices = [(year, year) for year in years]
+        year_choices.insert(0, ('', 'Toutes les années')) 
+        self.fields['year'].choices = year_choices

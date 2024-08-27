@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
-from .forms import ContactForm, YearFilterForm
+from .forms import ContactForm, ActsFilterForm
 from django.shortcuts import render
 from .models import CarouselImage, NextConference, ActOfTheDays
 
 def group_images(images, n):
-    """Divise les images en groupes de n éléments."""
     for i in range(0, len(images), n):
         yield images[i:i+n]
 
@@ -28,29 +27,32 @@ def agca(request):
     return render(request, template_name='main/ag-ca.html')
 
 def actcoftheday(request):
-    form = YearFilterForm(request.GET or None)
+    form = ActsFilterForm(request.GET or None)
     acts = ActOfTheDays.objects.all()
 
-    # Gestion du tri
-    sort_order = request.GET.get('sort', 'desc')  # 'desc' est la valeur par défaut
+    selected_year = None
+    search_title = form.cleaned_data.get('title', '') if form.is_valid() else request.GET.get('title', '')
+
+    sort_order = request.GET.get('sort', 'desc')
     if sort_order == 'asc':
         acts = acts.order_by('year')
     else:
         acts = acts.order_by('-year')
 
-    # Application du filtre par année si le formulaire est valide
     if form.is_valid():
         selected_year = form.cleaned_data.get('year')
         if selected_year:
             acts = acts.filter(year=selected_year)
-        else:
-            selected_year = None  # Assurer que selected_year est défini même si aucun filtre n'est appliqué
+
+    if search_title:
+        acts = acts.filter(title__icontains=search_title)
 
     return render(request, 'main/acts.html', {
         'form': form,
         'acts': acts,
         'selected_year': selected_year,
-        'sort_order': sort_order  # Ajouter le paramètre de tri à la context
+        'search_title': search_title,
+        'sort_order': sort_order
     })
 
 

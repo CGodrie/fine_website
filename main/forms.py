@@ -16,16 +16,21 @@ class ContactForm(forms.Form):
         widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Tapez votre message', 'rows': 5})
     )
 
-class YearFilterForm(forms.Form):
+class ActsFilterForm(forms.Form):
     year = forms.ChoiceField(
         choices=[],
         required=False,
         label="Sélectionnez une année"
     )
+    title = forms.CharField(
+        required=False,
+        label="Rechercher par titre",
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Rechercher par titre'})
+    )
 
     def __init__(self, *args, **kwargs):
-        super(YearFilterForm, self).__init__(*args, **kwargs)
+        super(ActsFilterForm, self).__init__(*args, **kwargs)
         years = ActOfTheDays.objects.values_list('year', flat=True).distinct().order_by('year')
         year_choices = [(year, year) for year in years]
-        year_choices.insert(0, ('', 'Toutes les années')) 
+        year_choices.insert(0, ('', 'Toutes les années'))
         self.fields['year'].choices = year_choices

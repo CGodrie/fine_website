@@ -3,27 +3,39 @@
 {% block content %}
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Liste des Actes {% if selected_year %} {{ selected_year }} {% endif %}</h1>
-    <!-- Formulaire pour filtrer les actes par année avec tri -->
-    <form method="GET" action="{% url 'act-of-the-days' %}" class="form-inline justify-content-center mb-4">
-        <div class="form-group mb-2">
-            {{ form.year.label_tag }}
+    <h1 class="text-center mb-4">Liste des actes des journées antérieures</h1>
+    <!-- Formulaire pour filtrer les actes par année avec tri et recherche par titre -->
+    <form method="GET" action="{% url 'act-of-the-days' %}" class="form-inline mb-4">
+        <div class="form-group mr-2">
             {{ form.year }}
         </div>
-        <button type="submit" class="btn btn-primary ml-2">Filtrer</button>
-        {% if selected_year is None %}
-        <a href="?sort=asc{% if form.year.value %}&year={{ form.year.value }}{% endif %}"
-            class="btn btn-outline-secondary ml-2">
-            <i class="bi bi-arrow-up"></i> Trier Croissant
-        </a>
-        <a href="?sort=desc{% if form.year.value %}&year={{ form.year.value }}{% endif %}"
-            class="btn btn-outline-secondary ml-2">
-            <i class="bi bi-arrow-down"></i> Trier Décroissant
-        </a>
-        {% endif %}
+
+        <div class="form-group mr-2 position-relative">
+            <input type="text" name="title" value="{{ request.GET.title }}" class="form-control search-input"
+                placeholder="Rechercher par titre">
+            <button type="button" class="btn-clear" onclick="clearSearch('search-input')">×</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+
+        <!-- Boutons de tri -->
+        <div class="form-group ml-2">
+            {% if sort_order == 'asc' %}
+            <a href="?sort=desc{% if form.year.value %}&year={{ form.year.value }}{% endif %}&title={{ request.GET.title }}"
+                class="btn btn-outline-secondary">
+                <img src="{% static 'media/icon-desc.png' %}" alt="Trier Décroissant" class="custom-icon">
+            </a>
+            {% else %}
+            <a href="?sort=asc{% if form.year.value %}&year={{ form.year.value }}{% endif %}&title={{ request.GET.title }}"
+                class="btn btn-outline-secondary">
+                <img src="{% static 'media/icon-asc.png' %}" alt="Trier Croissant" class="custom-icon">
+            </a>
+            {% endif %}
+        </div>
     </form>
 
     <!-- Liste des actes -->
+    {% if acts %}
     <ul class="list-group">
         {% for act in acts %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -33,6 +45,10 @@
         </li>
         {% endfor %}
     </ul>
+    {% else %}
+    <p class="text-center">Aucun acte trouvé pour cette sélection.</p>
+    {% endif %}
+
 </div>
 
 {% endblock content %}

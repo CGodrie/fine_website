@@ -9,7 +9,7 @@ urlpatterns = [
     path('objectifs', views.objectives, name="objectives"),
     path('ag-ca', views.agca, name="ag-ca"),
     path('contact', views.contact, name="contact"),
-    path('acte-des-journees', views.actcoftheday, name="act-of-the-days"),
+    path('actes-des-journees', views.actcoftheday, name="acts-of-the-days"),
     path('ca-zone-privée', views.caprivatezone, name="ca-private-zone"),
     path('contact', views.contact, name="contact"),
 ]

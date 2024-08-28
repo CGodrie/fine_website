@@ -3,9 +3,9 @@
 {% block content %}
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Liste des actes des journées antérieures</h1>
+    <h1 class="text-left mb-4">Liste des actes des journées antérieures</h1>
     <!-- Formulaire pour filtrer les actes par année avec tri et recherche par titre -->
-    <form method="GET" action="{% url 'act-of-the-days' %}" class="form-inline mb-4">
+    <form method="GET" action="{% url 'acts-of-the-days' %}" class="form-inline mb-4">
         <div class="form-group mr-2">
             {{ form.year }}
         </div>

@@ -38,8 +38,8 @@
                         CA</a>
                     <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}"
                         href="{% url 'contact' %}">Contact</a>
-                    <a class="nav-item nav-link {% if request.path == '/acte-des-journees' %}active{% endif %}"
-                        href="{% url 'act-of-the-days' %}">Acte des journées</a>
+                    <a class="nav-item nav-link {% if request.path == '/actes-des-journees' %}active{% endif %}"
+                        href="{% url 'acts-of-the-days' %}">Actes des journées</a>
                 </div>
                 <div class="navbar-nav ml-auto d-flex align-items-center">
                     {% if user.is_authenticated %}

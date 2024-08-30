@@ -68,6 +68,25 @@
   width: 100%;
 }
 
+/* Styles généraux pour les images du carrousel */
+.carousel-item img {
+  max-width: 80%;
+  height: auto;
+  object-fit: cover;
+  margin: auto;
+}
+
+/* Ajustement des contrôles du carrousel */
+.carousel-control-prev, .carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
 /* Ajustement des indicateurs du carrousel */
 .carousel-indicators {
   bottom: -40px;
@@ -86,35 +105,35 @@
   border: 1px solid black;
 }
 
-/* Ajustement des contrôles du carrousel */
-.carousel-control-prev, .carousel-control-next {
-  width: 1.5%;
+/* Styles pour les écrans plus grands */
+@media (min-width: 768px) {
+
+  .carousel-item .row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .carousel-item .col-md-4 {
+    flex: 1 0 33.333%;
+  }
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
+/* Styles pour les petits écrans (mobiles) */
+@media (max-width: 767px) {
+  .carousel-item .row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .carousel-item .col-12 {
+    flex: 0 0 100%;
+  }
 }
 
-/* Ajustement des images du carrousel */
-.carousel-item img {
-  max-width: 90%;
-  height: auto;
-  object-fit: contain;
-  margin: auto;
-}
-
-.carousel-item .row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.carousel-item {
-  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
-}
 
 /* Styles pour le bouton de suppression */
 .btn-clear {

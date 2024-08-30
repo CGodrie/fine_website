@@ -13,7 +13,7 @@ def home(request):
     images = CarouselImage.objects.all()
     image_groups = list(group_images(images, 3)) 
     next_conference = NextConference.objects.first()
-    return render(request, 'main/home.html', {'image_groups': image_groups, 'next_conference': next_conference})
+    return render(request, 'main/home.html', {'images': images, 'image_groups': image_groups, 'next_conference': next_conference})
 
 def history(request):
     return render(request, template_name='main/history.html')
@@ -60,8 +60,6 @@ def actc_of_the_day(request):
         'search_title': search_title,
         'sort_order': sort_order
     })
-
-
 
 def caprivatezone(request):
     return render(request, template_name='main/home.html')

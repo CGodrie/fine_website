@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CarouselImage, NextConference, ActOfTheDays
+from .models import CarouselImage, NextConference, ActOfTheDays, LinksCategories, UsefullLinks, LearningResources
 
 class CarouselImageAdmin(admin.ModelAdmin):
     list_display = ['title', 'order']
@@ -11,7 +11,18 @@ class NextConferenceAdmin(admin.ModelAdmin):
 class ActOfTheDaysAdmin(admin.ModelAdmin):
     list_display = ['title', 'year']
 
+class LinksCategoriesAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+class UsefullLinksAdmin(admin.ModelAdmin):
+    list_display = ['title']
+    
+class LearningResourcesAdmin(admin.ModelAdmin):
+    list_display = ['title']
 
 admin.site.register(CarouselImage, CarouselImageAdmin)
 admin.site.register(NextConference, NextConferenceAdmin)
 admin.site.register(ActOfTheDays, ActOfTheDaysAdmin)
+admin.site.register(LinksCategories, LinksCategoriesAdmin)
+admin.site.register(UsefullLinks, UsefullLinksAdmin)
+admin.site.register(LearningResources, LearningResourcesAdmin)

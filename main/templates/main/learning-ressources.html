@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-left mb-4">Liste des ressources pédagogiques</h1>
+
+    {% if learning_ressources %}
+    <ul class="list-group mb-4 {{ cat }}">
+        {% for ressource in learning_ressources %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% if ressource.file %}{{ ressource.file.url }}{% else %}{{ ressource.url }}{% endif %}"
+                target="_blank" class="text-decoration-none">
+                {{ ressource.title }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</div>
+
+{% endblock content %}

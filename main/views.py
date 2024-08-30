@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ContactForm, ActsFilterForm
 from django.shortcuts import render
-from .models import CarouselImage, NextConference, ActOfTheDays
+from .models import CarouselImage, NextConference, ActOfTheDays, UsefullLinks, LearningResources
 
 def group_images(images, n):
     for i in range(0, len(images), n):
@@ -15,8 +15,6 @@ def home(request):
     next_conference = NextConference.objects.first()
     return render(request, 'main/home.html', {'image_groups': image_groups, 'next_conference': next_conference})
 
-
-
 def history(request):
     return render(request, template_name='main/history.html')
     
@@ -25,8 +23,9 @@ def objectives(request):
 
 def agca(request):
     return render(request, template_name='main/ag-ca.html')
+from collections import defaultdict
 
-def actcoftheday(request):
+def actc_of_the_day(request):
     form = ActsFilterForm(request.GET or None)
     acts = ActOfTheDays.objects.all()
 
@@ -47,13 +46,21 @@ def actcoftheday(request):
     if search_title:
         acts = acts.filter(title__icontains=search_title)
 
+    acts_by_year = defaultdict(list)
+    for act in acts:
+        acts_by_year[act.year].append(act)
+
+    acts_by_year = dict(acts_by_year)
+
+    # Renvoyer les données au template
     return render(request, 'main/acts.html', {
         'form': form,
-        'acts': acts,
+        'acts_by_year': acts_by_year,
         'selected_year': selected_year,
         'search_title': search_title,
         'sort_order': sort_order
     })
+
 
 
 def caprivatezone(request):
@@ -80,3 +87,24 @@ def contact(request):
         form = ContactForm()
 
     return render(request, 'main/contact.html', {'form': form})
+
+def links(request):
+    links = UsefullLinks.objects.all()
+
+    links_by_cat = defaultdict(list)
+    for link in links:
+        links_by_cat[link.category].append(link)
+
+    links_by_cat = dict(links_by_cat)
+
+    # Renvoyer les données au template
+    return render(request, 'main/links.html', {
+        'links_by_cat': links_by_cat,
+    })
+
+def learning_ressources(request):
+    learning_ressources = LearningResources.objects.all()
+    
+    return render(request, 'main/learning-ressources.html', {
+        'learning_ressources': learning_ressources,
+    })

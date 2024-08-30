@@ -9,9 +9,12 @@ urlpatterns = [
     path('objectifs', views.objectives, name="objectives"),
     path('ag-ca', views.agca, name="ag-ca"),
     path('contact', views.contact, name="contact"),
-    path('actes-des-journees', views.actcoftheday, name="acts-of-the-days"),
+    path('actes-des-journees', views.actc_of_the_day, name="acts-of-the-days"),
     path('ca-zone-privée', views.caprivatezone, name="ca-private-zone"),
     path('contact', views.contact, name="contact"),
+    path('liens', views.links, name="links"),
+    path('ressources-pedagogiques', views.learning_ressources, name="learning-ressources"),
+
 ]
 
 if settings.DEBUG:

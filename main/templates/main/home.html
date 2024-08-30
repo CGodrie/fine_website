@@ -5,7 +5,7 @@
 <h2 class="text-left">ASBL Fédération des enseignants en soins infirmiers</h2>
 <p class="text-left">Belgique - Communauté française et germanophone et Grand-Duché du Luxembourg</p>
 
-<div class="jumbotron"> <!-- Changer de manière interactive -->
+<div class="jumbotron">
     <h1 class="display-4">{{ next_conference.title }}</h1>
     <p class="lead">{{ next_conference.location }} – {{ next_conference.date }} </p>
     {% if next_conference.inscription_open %}
@@ -65,7 +65,7 @@
             </a>
         </div>
         <div class="col">
-            <a href="URL_POUR_RESSOURCES_PEDAGOGIQUES" class="card custom-card">
+            <a href="{% url 'learning-ressources' %}" class="card custom-card">
                 <img src="{% static 'media/ressources.jpg' %}" class="card-img-top" alt="Ressources pédagogiques">
                 <div class="card-body text-center">
                     <p class="card-text">Ressources pédagogiques</p>
@@ -73,7 +73,7 @@
             </a>
         </div>
         <div class="col">
-            <a href="URL_POUR_LIENS_UTILES" class="card custom-card">
+            <a href="{% url 'links' %}" class="card custom-card">
                 <img src="{% static 'media/links.jpg' %}" class="card-img-top" alt="Liens utiles">
                 <div class="card-body text-center">
                     <p class="card-text">Liens utiles</p>

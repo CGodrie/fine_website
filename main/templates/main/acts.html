@@ -18,7 +18,7 @@
 
         <button type="submit" class="btn btn-primary">Filtrer</button>
 
-        <!-- Boutons de tri -->
+        {% if not selected_year %}
         <div class="form-group ml-2">
             {% if sort_order == 'asc' %}
             <a href="?sort=desc{% if form.year.value %}&year={{ form.year.value }}{% endif %}&title={{ request.GET.title }}"
@@ -32,19 +32,23 @@
             </a>
             {% endif %}
         </div>
+        {% endif %}
     </form>
 
-    <!-- Liste des actes -->
-    {% if acts %}
-    <ul class="list-group">
+    <!-- Liste des actes groupés par année -->
+    {% if acts_by_year %}
+    {% for year, acts in acts_by_year.items %}
+    <h2 class="mt-4">{{ year }}</h2>
+    <ul class="list-group mb-4 {{ year }}">
         {% for act in acts %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <a href="{{ act.file.url }}" target="_blank" class="text-decoration-none">
-                {{ act.year }} : {{ act.title }}
+                {{ act.title }}
             </a>
         </li>
         {% endfor %}
     </ul>
+    {% endfor %}
     {% else %}
     <p class="text-center">Aucun acte trouvé pour cette sélection.</p>
     {% endif %}

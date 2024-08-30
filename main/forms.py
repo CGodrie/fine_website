@@ -30,7 +30,7 @@ class ActsFilterForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(ActsFilterForm, self).__init__(*args, **kwargs)
-        years = ActOfTheDays.objects.values_list('year', flat=True).distinct().order_by('year')
+        years = ActOfTheDays.objects.values_list('year', flat=True).distinct().order_by('-year')
         year_choices = [(year, year) for year in years]
         year_choices.insert(0, ('', 'Toutes les années'))
         self.fields['year'].choices = year_choices

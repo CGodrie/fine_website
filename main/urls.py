@@ -16,6 +16,3 @@ urlpatterns = [
     path('ressources-pedagogiques', views.learning_ressources, name="learning-ressources"),
 
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

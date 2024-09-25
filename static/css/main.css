@@ -1,0 +1,154 @@
+.navbar-brand img {
+  height: 75px;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color: black;
+  margin-right: 15px;
+}
+
+.nav-link.active {
+  color: #0056b3 !important;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #0056b3;
+  color: white !important;
+  border: none;
+}
+
+.ml-2 {
+  margin-left: 15px;
+  color: black;
+}
+
+/* Styles personnalisés pour les cartes */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.custom-card {
+  width: 100%;
+  /* Pour s'assurer que les cartes prennent toute la largeur du conteneur */
+  height: 250px;
+  /* Hauteur fixe pour chaque carte */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.custom-card .card-img-top {
+  max-height: 150px;
+  /* Hauteur maximale pour l'image */
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.custom-card .card-text {
+  font-weight: bold;
+  flex-grow: 1;
+  /* Permet à la description de prendre de l'espace disponible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.card-container a {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+}
+
+/* Styles généraux pour les images du carrousel */
+.carousel-item img {
+  max-width: 80%;
+  height: auto;
+  object-fit: cover;
+  margin: auto;
+}
+
+/* Ajustement des contrôles du carrousel */
+.carousel-control-prev, .carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+/* Ajustement des indicateurs du carrousel */
+.carousel-indicators {
+  bottom: -40px;
+}
+
+.carousel-indicators li {
+  background-color: black;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  border: 1px solid white;
+}
+
+.carousel-indicators .active {
+  background-color: white;
+  border: 1px solid black;
+}
+
+/* Styles pour les écrans plus grands */
+@media (min-width: 768px) {
+
+  .carousel-item .row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .carousel-item .col-md-4 {
+    flex: 1 0 33.333%;
+  }
+}
+
+/* Styles pour les petits écrans (mobiles) */
+@media (max-width: 767px) {
+  .carousel-item .row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .carousel-item .col-12 {
+    flex: 0 0 100%;
+  }
+}
+
+
+/* Styles pour le bouton de suppression */
+.btn-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  color: #aaa;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn-clear:hover {
+  color: #333;
+}

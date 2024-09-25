@@ -71,3 +71,13 @@ class LearningResources(models.Model):
 
     def __str__(self):
         return self.title
+
+from django.db import models
+
+class CAFile(models.Model):
+    title = models.CharField(max_length=255)  # Nom du fichier
+    file = models.FileField(upload_to='ca_files/')  # Chemin du fichier
+
+    def __str__(self):
+        return self.title
+

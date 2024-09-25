@@ -3,7 +3,9 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ContactForm, ActsFilterForm
 from django.shortcuts import render
-from .models import CarouselImage, NextConference, ActOfTheDays, UsefullLinks, LearningResources
+from .models import CarouselImage, NextConference, ActOfTheDays, UsefullLinks, LearningResources, CAFile
+from collections import defaultdict
+from django.contrib.auth.decorators import login_required
 
 def group_images(images, n):
     for i in range(0, len(images), n):
@@ -23,7 +25,11 @@ def objectives(request):
 
 def agca(request):
     return render(request, template_name='main/ag-ca.html')
-from collections import defaultdict
+
+@login_required
+def ca_private_zone(request):
+    files = CAFile.objects.all()
+    return render(request, template_name='main/ca-private-zone.html', context={'files': files})
 
 def actc_of_the_day(request):
     form = ActsFilterForm(request.GET or None)
@@ -60,9 +66,6 @@ def actc_of_the_day(request):
         'search_title': search_title,
         'sort_order': sort_order
     })
-
-def caprivatezone(request):
-    return render(request, template_name='main/home.html')
 
 def contact(request):
     if request.method == 'POST':

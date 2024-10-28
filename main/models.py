@@ -62,12 +62,20 @@ class LearningResources(models.Model):
     file = models.FileField(upload_to='learning-ressources/', blank=True, null=True)
 
     def clean(self):
-        # Vérifier si les deux champs sont remplis
         if self.url and self.file:
             raise ValidationError("Vous ne pouvez pas remplir à la fois le champ URL et le champ fichier.")
-        # Vérifier si aucun des deux champs n'est rempli
         if not self.url and not self.file:
             raise ValidationError("Vous devez remplir soit le champ URL, soit le champ fichier.")
 
     def __str__(self):
         return self.title
+
+from django.db import models
+
+class CAFile(models.Model):
+    title = models.CharField(max_length=255)  # Nom du fichier
+    file = models.FileField(upload_to='ca_files/')  # Chemin du fichier
+
+    def __str__(self):
+        return self.title
+

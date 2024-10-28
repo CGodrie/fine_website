@@ -10,12 +10,9 @@ urlpatterns = [
     path('ag-ca', views.agca, name="ag-ca"),
     path('contact', views.contact, name="contact"),
     path('actes-des-journees', views.actc_of_the_day, name="acts-of-the-days"),
-    path('ca-zone-privée', views.caprivatezone, name="ca-private-zone"),
+    path('ca-zone-privée', views.ca_private_zone, name="ca-private-zone"),
     path('contact', views.contact, name="contact"),
     path('liens', views.links, name="links"),
     path('ressources-pedagogiques', views.learning_ressources, name="learning-ressources"),
 
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

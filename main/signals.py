@@ -20,12 +20,12 @@ def delete_image_file(sender, instance, **kwargs):
 
 
 @receiver(post_delete, sender=NextConference)
-def delete_program(sender, instance, **kwargs):
+def delete_programme(sender, instance, **kwargs):
     """
     Suppression des fichiers associés (PDF et image) lorsque l'instance du modèle est supprimée.
     """
-    if instance.program:
-        pdf_path = instance.program.path
+    if instance.programme:
+        pdf_path = instance.programme.path
         if os.path.isfile(pdf_path):
             try:
                 os.remove(pdf_path)

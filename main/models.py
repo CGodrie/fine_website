@@ -20,7 +20,7 @@ class NextConference(models.Model):
     location = models.CharField(max_length=100, blank=True)
     date = models.CharField(max_length=100, blank=True)
     programme = models.FileField(upload_to='conferences/programmes/', blank=True, null=True)
-    image = models.ImageField(upload_to='conferences/images/', default='conferences/images/image002.jpg')
+    image = models.ImageField(upload_to='conferences/images/', default='conferences/images/default.png')
     link_form = models.CharField(max_length=100, blank=True)
     inscription_open = models.BooleanField(default=False)
 

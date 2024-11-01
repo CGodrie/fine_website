@@ -1,5 +1,41 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block content %}
-<h1>Page en construction</h1>
+
+<div class="container mt-5">
+    <h1 class="text-left mb-4">AG - CA</h1>
+
+    <h2 class="mt-4">Documents de l'Assemblée Générale</h2>
+    {% if documents %}
+    <ul class="list-group mb-4">
+        {% for document in documents %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ document.link }}" target="_blank" class="text-decoration-none">
+                {{ document.title }} - {{ document.date }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-center">Aucun document disponible.</p>
+    {% endif %}
+
+    <h2 class="mt-4">Réunions Prochaines</h2>
+    {% if meetings %}
+    <ul class="list-group mb-4">
+        {% for meeting in meetings %}
+        <li class="list-group-item">
+            <strong>{{ meeting.title }}</strong><br>
+            <strong>Date :</strong> {{ meeting.date }}<br>
+            <strong>Heure :</strong> {{ meeting.start_time }} - {{ meeting.end_time }}<br>
+            <strong>Lieu :</strong> {{ meeting.location }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-center">Aucune réunion prévue pour le moment.</p>
+    {% endif %}
+
+</div>
+
 {% endblock content %}

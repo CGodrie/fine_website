@@ -70,12 +70,31 @@ class LearningResources(models.Model):
     def __str__(self):
         return self.title
 
-from django.db import models
 
 class CAFile(models.Model):
-    title = models.CharField(max_length=255)  # Nom du fichier
-    file = models.FileField(upload_to='ca_files/')  # Chemin du fichier
-
+    title = models.CharField(max_length=255)
+    file = models.FileField(upload_to='ca_files/')
+    
     def __str__(self):
         return self.title
+    
+class AGFile(models.Model):
+    title = models.CharField(max_length=255)
+    date = models.DateField()
+    file = models.FileField(upload_to='ag_files/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.date}"
+
+class Meeting(models.Model):
+    title = models.CharField(max_length=255, default="Réunion")
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"Réunion du {self.date} - {self.location}"
+    
+
 

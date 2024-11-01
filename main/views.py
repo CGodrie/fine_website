@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ContactForm, ActsFilterForm
 from django.shortcuts import render
-from .models import CarouselImage, NextConference, ActOfTheDays, UsefullLinks, LearningResources, CAFile
+from .models import CarouselImage, NextConference, ActOfTheDays, UsefullLinks, LearningResources, CAFile, AGFile, Meeting
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required
+from decouple import config
 
 def group_images(images, n):
     for i in range(0, len(images), n):
@@ -24,7 +25,10 @@ def objectives(request):
     return render(request, template_name='main/objectives.html')
 
 def agca(request):
-    return render(request, template_name='main/ag-ca.html')
+    documents = AGFile.objects.all().order_by('-date')
+    meetings = Meeting.objects.all().order_by('date')
+
+    return render(request, 'main/ag-ca.html', {'documents': documents, 'meetings': meetings})
 
 @login_required
 def ca_private_zone(request):
@@ -58,7 +62,6 @@ def actc_of_the_day(request):
 
     acts_by_year = dict(acts_by_year)
 
-    # Renvoyer les données au template
     return render(request, 'main/acts.html', {
         'form': form,
         'acts_by_year': acts_by_year,
@@ -75,14 +78,24 @@ def contact(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             
+            plain_content = f"Ce message a été envoyé par {name}. Pour répondre à cette personne, veuillez envoyer un email à {email}\nContenu du message :\n\n{message}"
+            
+            html_content = f"""
+                <p>Ce message a été envoyé par <strong>{name}</strong>. Pour répondre à cette personne, veuillez envoyer un email à {email}.</p>
+                <p><strong>Contenu du message :</strong></p>
+                <p>{message}</p>
+            """
+            
             send_mail(
-                f"Message de {name} via le formulaire de contact",
-                message,
-                email,
-                ['clemgod5@gmail.com'],  # charger dynamiquement
+                subject=f"Message provenant de {name} via le formulaire de contact",
+                message=plain_content,
+                from_email=email,
+                recipient_list=[config("EMAIL_HOST_USER")],
                 fail_silently=False,
+                html_message=html_content 
             )
-            messages.success(request, f'Merci pour votre message ! Nous reviendrons vers vous dès que possible.')
+
+            messages.success(request, 'Merci pour votre message ! Nous reviendrons vers vous par email dès que possible.')
             return redirect('home')
     else:
         form = ContactForm()
@@ -98,7 +111,6 @@ def links(request):
 
     links_by_cat = dict(links_by_cat)
 
-    # Renvoyer les données au template
     return render(request, 'main/links.html', {
         'links_by_cat': links_by_cat,
     })

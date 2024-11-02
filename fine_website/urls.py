@@ -24,9 +24,7 @@ from users.views import change_password, CustomLoginView
 from django.urls import re_path
 from django.views.static import serve
 from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -59,7 +59,7 @@ class UsefullLinks(models.Model):
 class LearningResources(models.Model):
     title = models.CharField(max_length=100)
     url = models.URLField(blank=True, null=True)  # Autoriser le champ URL à être vide
-    file = models.FileField(upload_to='learning-ressources/', blank=True, null=True)
+    file = models.FileField(upload_to='learning_ressources/', blank=True, null=True)
 
     def clean(self):
         if self.url and self.file:
